@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORENSIZER - Análise de Provas Digitais</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    </head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🔍 FORENSIZER</div>
+            <div class="tagline">Análise Técnica de Provas Digitais</div>
+        </div>
+        
+        <div class="main-content">
+            <!-- Seção de Upload -->
+            <div class="upload-section" id="uploadSection">
+                <div class="upload-icon">📁</div>
+                <h2 style="margin-bottom: 12px; color: var(--dark);">Faça o Upload da Prova Digital</h2>
+                <p style="margin-bottom: 20px; color: var(--gray);">Arraste e solte o arquivo ou clique para selecionar</p>
+                
+                <div id="fileNameDisplay" style="display: none; margin-bottom: 15px;">
+                    <div class="file-info">
+                        <div style="font-weight: 600; margin-bottom: 10px;">📁 Arquivo Selecionado</div>
+                        <div id="fileDetails"></div>
+                    </div>
+                </div>
+                
+                <input type="file" id="fileInput" style="display: none;" accept="*/*">
+                <button class="btn" onclick="document.getElementById('fileInput').click()">
+                    📎 Selecionar Arquivo
+                </button>
+            </div>
+            
+            <!-- Formulário de Dados -->
+            <div id="dataForm" style="display: none;">
+                <h2 style="color: var(--dark); margin-bottom: 20px;">Informações para Análise</h2>
+                
+                <div class="form-group">
+                    <label for="nomeCliente">Seu Nome Completo *</label>
+                    <input type="text" id="nomeCliente" placeholder="Digite seu nome completo" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="emailCliente">Seu E-mail *</label>
+                    <input type="email" id="emailCliente" placeholder="Digite seu e-mail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="origemProva">Origem Declarada da Prova *</label>
+                    <select id="origemProva" required>
+                        <option value="">Selecione a origem...</option>
+                        <option value="whatsapp">WhatsApp</option>
+                        <option value="email">E-mail</option>
+                        <option value="redes_sociais">Redes Sociais</option>
+                        <option value="celular">Celular/Smartphone</option>
+                        <option value="computador">Computador/Notebook</option>
+                        <option value="outro">Outra Origem</option>
+                    </select>
+                </div>
+                
+                <button class="btn btn-success" onclick="iniciarAnalise()">
+                    🔍 Iniciar Análise Gratuita
+                </button>
+            </div>
+            
+            <!-- Loading -->
+            <div class="loading" id="loadingSection">
+                <div class="spinner"></div>
+                <h3 style="color: var(--dark); margin-bottom: 12px;">Analisando Prova Digital...</h3>
+                <p style="color: var(--gray);">Estamos verificando compatibilidade técnica e integridade do arquivo</p>
+                <div id="progressInfo" style="margin-top: 15px; color: var(--primary); font-weight: 600;"></div>
+            </div>
+            
+            <!-- Resultados Gratuitos -->
+            <div class="result-section" id="resultSection">
+                <div class="result-header">
+                    <h2>Resultado da Análise</h2>
+                    <p>Compatibilidade entre arquivo e origem declarada</p>
+                </div>
+                
+                <div class="result-content">
+                    <div class="result-grid">
+                        <div class="result-card">
+                            <h3>Status da Compatibilidade</h3>
+                            <div class="status-display">
+                                <div class="status-icon" id="statusIcon">📊</div>
+                                <div class="status-text">
+                                    <div style="font-size: 1em; font-weight: 600; margin-bottom: 5px;" id="statusText"></div>
+                                    <div class="compatibility-badge" id="compatibilityBadge"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="result-card">
+                            <h3>Pontuação Técnica</h3>
+                            <div class="score-display">
+                                <div class="score-number" id="pontuacaoResult"></div>
+                                <div class="score-total">de 100 pontos</div>
+                            </div>
+                            <div style="text-align: center; margin-top: 12px; font-style: italic; color: var(--gray); font-size: 0.95em;" id="recomendacaoResult"></div>
+                        </div>
+                        
+                        <div class="result-card">
+                            <h3>Hash SHA-256</h3>
+                            <div style="margin-bottom: 12px; color: var(--gray); font-size: 0.9em;">
+                                Identificador único do arquivo
+                            </div>
+                            <div class="hash-display" id="hashResult"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="result-grid">
+                        <div class="result-card">
+                            <h3>Metadados do Arquivo</h3>
+                            <div id="metadadosResult"></div>
+                        </div>
+                        
+                        <div class="result-card">
+                            <h3>Incompatibilidades Detectadas</h3>
+                            <div id="incompatibilidadesResult"></div>
+                        </div>
+                        
+                        <div class="result-card">
+                            <h3>Observações Técnicas</h3>
+                            <div id="observacoesResult"></div>
+                        </div>
+                    </div>
+
+                    <!-- Seção Premium Bloqueada -->
+                    <div class="result-card premium-feature">
+                        <h3>🔒 Dados Técnicos Completos <span class="premium-badge">PREMIUM</span></h3>
+                        <div style="color: var(--gray); margin-bottom: 15px;">
+                            Informações completas da análise incluindo dispositivo, localização e dados forenses avançados
+                        </div>
+                        <div id="premiumPreview">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; opacity: 0.6;">
+                                <div>📱 Dispositivo: <strong>Bloqueado</strong></div>
+                                <div>💻 Sistema: <strong>Bloqueado</strong></div>
+                                <div>📍 Localização: <strong>Bloqueado</strong></div>
+                                <div>🌐 IP: <strong>Bloqueado</strong></div>
+                                <div>🕐 Timestamp: <strong>Bloqueado</strong></div>
+                                <div>🏙️ Cidade: <strong>Bloqueado</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-warning" onclick="solicitarRelatorioCompleto()">
+                            📄 Relatório Completo (R$ 97)
+                        </button>
+                        <button class="btn" onclick="solicitarConsultoria()">
+                            💼 Consultoria Especializada
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
