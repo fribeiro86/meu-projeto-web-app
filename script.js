@@ -3,7 +3,7 @@
 // =============================================
 
 // CONFIGURAÇÃO - SUBSTITUA pela URL do seu Google Apps Script
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz59X_rhncwOudsCPFitW5YVAm9KTlnDZNz-O76uy00f1LtiOYwk2WBo69Q-BduLhIe/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxtSmO0MNjsQbSNtO9CcVPBBW2NAqJTqu3EIOuYled_-Jax768t8YQkw9AhJEMYxc-dEQ/exec';
 
 let currentAnalysisId = null;
 let currentFileData = null;
