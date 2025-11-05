@@ -3,7 +3,7 @@
 // =============================================
 
 // CONFIGURAÇÃO - SUBSTITUA pela URL do seu Google Apps Script
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwnM2kz6RrWM2G6rXM1MJ1nuB_6LTlxU8ybcW50_sY3I073P6pfWufukUTDfeatt21dew/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzFdmZB-ydHB0DB_sjfXjQCSzB4yP0V5iszsRwJz1gh4hDGlhPJPOVoGLdx0D9gqJmmMw/exec';
 
 let currentAnalysisId = null;
 let currentFileData = null;
@@ -621,4 +621,5 @@ function updateProgress(mensagem) {
 function mostrarLoading(mostrar) {
     document.getElementById('loadingSection').style.display = mostrar ? 'block' : 'none';
 }
+
 
